@@ -1,5 +1,6 @@
-from turtle import Turtle, Screen, bgpic, register_shape
 from tkinter import Tk
+from turtle import Turtle, Screen
+from aliens import basicInvader
 
 root = Tk()
 root.withdraw()
@@ -25,34 +26,46 @@ col_0 = -x_span + MARGIN
 this_row = row_0 + row_height
 
 
+# for y in range(0, 8):
+#     this_row -= row_height
+#     for x in range(0, 16):
+#         if 3 < x < 13:
+#             na = Turtle()
+#             na.penup()
+#             na.shape(SA)
+#             na.shapesize(1.5, 1.5)
+#             na.color("white")
+#             na.goto((-x_span + MARGIN + (x * col_width) - SIZE // 2), this_row)
 
-
-
-
+i1 = basicInvader(SA, x_span, y_span, MARGIN, col_width, SIZE, row_height, row_0)
 screen = Screen()
 screen.setup(game_width, game_height)
 screen.bgcolor('black')
 screen.tracer(0)
 # screen.bgpic("/Users/atormey/Downloads/3aee3df5c7e413c08033f57fb09894edcf1def1b_00.gif")
-
-
-alien_invaders = []
-for y in range(0, 8):
-    this_row -= row_height
-    for x in range(0, 16):
-        if 3 < x < 13:
-            na = Turtle()
-            na.penup()
-            na.shape(SA)
-            na.shapesize(1.5, 1.5)
-            na.color("white")
-            na.goto((-x_span + MARGIN + (x * col_width) - SIZE//2), this_row)
-
-
-
-
+i1.level_01()
 screen.update()
 screen.listen()
+
+game = True
+while game == True:
+    state = i1.alien_motion()
+    screen.update()
+    print(state)
+    if state == False:
+        game = False
+
+# alien_invaders = []
+# for y in range(0, 8):
+#     this_row -= row_height
+#     for x in range(0, 16):
+#         if 3 < x < 13:
+#             na = Turtle()
+#             na.penup()
+#             na.shape(SA)
+#             na.shapesize(1.5, 1.5)
+#             na.color("white")
+#             na.goto((-x_span + MARGIN + (x * col_width) - SIZE // 2), this_row)
 
 
 screen.exitonclick()
