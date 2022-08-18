@@ -1,5 +1,23 @@
 from turtle import Turtle
+from random import randint
 # TODO See commented out code below for ideas for an intro graphic
+
+class Laser(Turtle):
+    def __init__(self, x, y):
+        super().__init__()
+        self.las = Turtle()
+        self.las.penup()
+        self.las.shape('square')
+        self.las.shapesize(.2, 1)
+        self.las.setheading(270)
+        self.las.color('pink')
+        self.las.goto(x, y)
+
+    def laser_shoot(self):
+        if self.las.ycor() > -200:
+            self.las.forward(5)
+        else:
+            self.las.goto(self.las.xcor(), 400)
 
 class basicInvader(Turtle):
     def __init__(self, shape, xs, ys, mar, cw, size, rh, r0):
@@ -16,6 +34,12 @@ class basicInvader(Turtle):
         self.top_row = r0 + 1.5 * rh
         self.alien_invaders = []
         self.direction = "left"
+        self.num_of_lasers = 0
+        # self.l1 = Laser(50, 60)
+        # self.l2 = Laser(60, 70)
+        # self.l3 = Laser(70, 80)
+
+
 
     def level_01(self):
         this_row = self.top_row
@@ -35,7 +59,7 @@ class basicInvader(Turtle):
         # move down a row
         for n in range(len(self.alien_invaders)):
             if self.direction == "left":
-                self.alien_invaders[n].backward(1)
+                self.alien_invaders[n].backward(self.col_width/4)
                 if self.alien_invaders[n].xcor() <= -self.x_span + self.margin:
                     for n in range(len(self.alien_invaders)):
                         self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
@@ -46,7 +70,7 @@ class basicInvader(Turtle):
                         return False
                     break
             else:
-                self.alien_invaders[n].forward(1)
+                self.alien_invaders[n].forward(self.col_width/4)
                 if self.alien_invaders[n].xcor() >= self.x_span - self.margin:
                     for n in range(len(self.alien_invaders)):
                         self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
@@ -56,6 +80,10 @@ class basicInvader(Turtle):
                         return False
                     break
 
+    # def laser_shoot(self):
+    #     if randint(0,2) == 0:
+    #         print(self.l1.xcor())
+    #         self.l1.forward(10)
 
 
 

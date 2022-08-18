@@ -70,22 +70,18 @@ class Shelter(Turtle):
 
 
 
-screen = Screen()
-screen.tracer(0)
-screen.bgcolor('black')
 
-s1 = Shelter(4, 2, -250, -200, 'gray', 'red')
-s1.create_shelter()
-s2 = Shelter(4, 2, -100,-200, 'gray', 'red')
-s2.create_shelter()
-s3 = Shelter(4, 2, 50,-200, 'gray', 'red')
-s3.create_shelter()
-s4 = Shelter(4, 2, 200,-200, 'gray', 'red')
-s4.create_shelter()
+# s1 = Shelter(4, 2, -250, -200, 'gray', 'red')
+# s1.create_shelter()
+# s2 = Shelter(4, 2, -100,-200, 'gray', 'red')
+# s2.create_shelter()
+# s3 = Shelter(4, 2, 50,-200, 'gray', 'red')
+# s3.create_shelter()
+# s4 = Shelter(4, 2, 200,-200, 'gray', 'red')
+# s4.create_shelter()
 
 
 
-screen.update()
 
 
 
@@ -108,7 +104,7 @@ screen.update()
 
 
 
-screen.exitonclick()
+# screen.exitonclick()
 
 
 
