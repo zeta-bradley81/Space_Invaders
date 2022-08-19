@@ -2,8 +2,8 @@ from turtle import Turtle
 from random import randint
 # TODO See commented out code below for ideas for an intro graphic
 
-class Laser(Turtle):
-    def __init__(self, x, y):
+class laser(Turtle):
+    def __init__(self, x, y, ys):
         super().__init__()
         self.las = Turtle()
         self.las.penup()
@@ -12,12 +12,14 @@ class Laser(Turtle):
         self.las.setheading(270)
         self.las.color('pink')
         self.las.goto(x, y)
+        self.y_span = ys
+        self.laser_status = False
 
     def laser_shoot(self):
-        if self.las.ycor() > -200:
+        if self.las.ycor() < self.y_span:
             self.las.forward(5)
         else:
-            self.las.goto(self.las.xcor(), 400)
+            pass
 
 class basicInvader(Turtle):
     def __init__(self, shape, xs, ys, mar, cw, size, rh, r0):
@@ -66,6 +68,7 @@ class basicInvader(Turtle):
                     self.direction = 'right'
                     # TODO figure out this value
                     if self.alien_invaders[n].ycor() <= -self.y_span +50:
+                        self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
                         # TODO gameover
                         return False
                     break
