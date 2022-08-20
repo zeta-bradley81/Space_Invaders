@@ -35,6 +35,7 @@ class Fighter(Turtle):
         self.mis.setheading(105)
         self.mis.color('yellow')
         self.ys = y_span
+        self.fire_speed = 10
 
     def move_left(self):
         self.f1.backward(.5 * self.cw)
@@ -54,7 +55,7 @@ class Fighter(Turtle):
     def missile_flight(self):
         if self.weapons_status == False:
             if self.mis.ycor() < self.ys + 40:
-                self.mis.goto(self.mis.xcor(), self.mis.ycor() + 10)
+                self.mis.goto(self.mis.xcor(), self.mis.ycor() + self.fire_speed)
             else:
                 self.mis.goto(6000, 6000)
                 self.weapons_status = True

@@ -14,15 +14,16 @@ class laser(Turtle):
         self.las.goto(x, y)
         self.y_span = ys
         self.laser_status = False
+        self.fire_speed = 7
 
     def laser_shoot(self):
         if self.las.ycor() < self.y_span:
-            self.las.forward(5)
+            self.las.forward(self.fire_speed)
         else:
             pass
 
 class basicInvader(Turtle):
-    def __init__(self, shape, xs, ys, mar, cw, size, rh, r0):
+    def __init__(self, xs, ys, mar, cw, size, rh, r0):
         super().__init__()
         for x in range(1, 10):
             register_shape(f'alien_gifs/alien_{x}.gif')
@@ -65,22 +66,25 @@ class basicInvader(Turtle):
                     for n in range(len(self.alien_invaders)):
                         self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
                     self.direction = 'right'
-                    # TODO figure out this value
+                    # This ends the game
                     if self.alien_invaders[n].ycor() <= -self.y_span +50:
                         self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
                         # TODO gameover
                         return False
-                    break
+                    return 'shift'
+
             else:
                 self.alien_invaders[n].forward(self.col_width/4)
                 if self.alien_invaders[n].xcor() >= self.x_span - self.margin:
                     for n in range(len(self.alien_invaders)):
                         self.alien_invaders[n].goto(self.alien_invaders[n].xcor(), self.alien_invaders[n].ycor() - self.row_height)
                     self.direction = 'left'
+                    # This ends the game
                     if self.alien_invaders[n].ycor() <= -self.y_span + 50:
                         # TODO gameover
                         return False
-                    break
+                    return "shift"
+
 
     # def laser_shoot(self):
     #     if randint(0,2) == 0:
