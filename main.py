@@ -1,8 +1,3 @@
-# wave_object = simp.WaveObject.from_wave_file("../Breakout/04-Book of Marseille.wav")
-# # try to start thread to wait done while playing game. This is to know how/when to loop audio.
-# wo = wave_object.play()
-# # wo.wait_done()
-
 from tkinter import Tk
 from turtle import Screen
 from random import randint
@@ -10,9 +5,7 @@ import fighter
 from shelter import Shelter
 from aliens import basicInvader, laser
 from time import sleep
-import simpleaudio as simp
 from playsound import playsound
-from multiprocessing import Process
 
 root = Tk()
 root.withdraw()
@@ -42,6 +35,15 @@ row_0 = y_span - MARGIN
 col_0 = -x_span + MARGIN
 this_row = row_0 + row_height
 
+# ~~~~~~~~~~~~~~~~~    My Functions   ~~~~~~~~~~~~~~~~~
+def check_for_fire(input_laser):
+    fire_sounds = ("audio/04A_alien_fire_01.wav", "audio/04B_alien_fire_02.wav", "audio/04C_alien_fire_03.wav")
+    if randint(0, FIRE_RATE) == 0:
+            a = randint(1, 8)
+            input_laser.las.goto(i1.alien_invaders[-a].pos())
+            s = randint(0,2)
+            playsound(fire_sounds[s], False)
+            input_laser.laser_status = True
 
 def generate_shelters():
     shelter_area = game_width // 5
@@ -58,28 +60,17 @@ def generate_shelters():
     s4.create_shelter()
     shelter_list.append(s4)
 
-
 def hit_an_alien():
     for n in range(len(i1.alien_invaders)):
         try:
             if f.mis.xcor() - CALIBRATION_VALUE < i1.alien_invaders[n].xcor() < f.mis.xcor() + CALIBRATION_VALUE:
                 if f.mis.ycor() - CALIBRATION_VALUE < i1.alien_invaders[n].ycor() < f.mis.ycor() + CALIBRATION_VALUE:
-                    playsound("audio/02_hit_alien.wav", False)
+                    playsound("audio/03_hit_shelter.wav", False)
                     i1.alien_invaders[n].hideturtle()
                     i1.alien_invaders.remove(i1.alien_invaders[n])
                     f.mis.goto(6000, 6000)
         except IndexError:
             pass
-
-def check_for_fire(input_laser):
-    fire_sounds = ("audio/04A_alien_fire_01.wav", "audio/04B_alien_fire_02.wav", "audio/04C_alien_fire_03.wav")
-    if randint(0, FIRE_RATE) == 0:
-            a = randint(1, 8)
-            input_laser.las.goto(i1.alien_invaders[-a].pos())
-            s = randint(0,2)
-            playsound(fire_sounds[s], False)
-            input_laser.laser_status = True
-
 
 def hit_by_laser():
     global active_lasers
@@ -106,7 +97,7 @@ def hit_by_laser():
                 try:
                     if shelter_list[sh].shelter_turtles[st].xcor() - CALIBRATION_VALUE < laser_list[n].las.xcor() < shelter_list[sh].shelter_turtles[st].xcor() + CALIBRATION_VALUE:
                         if shelter_list[sh].shelter_turtles[st].ycor() - CALIBRATION_VALUE < laser_list[n].las.ycor() < shelter_list[sh].shelter_turtles[st].ycor() + CALIBRATION_VALUE:
-                            playsound("audio/03_hit_shelter.wav", False)
+                            playsound("audio/02_hit_alien.wav", False)
                             shelter_list[sh].shelter_turtles[st].hideturtle()
                             shelter_list[sh].shelter_turtles.remove(shelter_list[sh].shelter_turtles[st])
                             laser_list[n].las.goto(1000, 1000)
@@ -116,20 +107,6 @@ def hit_by_laser():
 
 
     #                     TODO lose a life
-
-
-
-# def alien_attacks():
-#     pass
-#     global active_lasers
-#     if randint(0, FIRE_RATE) == 0:
-#         if active_lasers < len(laser_list):
-#             a = randint(1, 8)
-#             laser_list[active_lasers].las.goto(i1.alien_invaders[-a].pos())
-#             active_lasers += 1
-#             print("FIRE")
-#     else:
-#         pass
 
 # ~~~~~~~~~~~~~~~~~    Initialize Graphics    ~~~~~~~~~~~~~~~~~
 screen = Screen()

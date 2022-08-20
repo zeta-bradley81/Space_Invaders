@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, register_shape
 from random import randint
 # TODO See commented out code below for ideas for an intro graphic
 
@@ -24,7 +24,8 @@ class laser(Turtle):
 class basicInvader(Turtle):
     def __init__(self, shape, xs, ys, mar, cw, size, rh, r0):
         super().__init__()
-        self.shape = shape
+        register_shape('alien_01.gif')
+        # self.shape = 'alien'
         self.x_span = xs
         self.y_span = ys
         self.margin = mar
@@ -37,9 +38,6 @@ class basicInvader(Turtle):
         self.alien_invaders = []
         self.direction = "left"
         self.num_of_lasers = 0
-        # self.l1 = Laser(50, 60)
-        # self.l2 = Laser(60, 70)
-        # self.l3 = Laser(70, 80)
 
 
 
@@ -51,7 +49,8 @@ class basicInvader(Turtle):
                 if 3 < x < 13:
                     na = Turtle()
                     na.penup()
-                    na.shape(self.shape)
+                    # na.shape(self.shape)
+                    na.shape('alien_01.gif')
                     na.shapesize(1.5, 1.5)
                     na.color("white")
                     na.goto((-self.x_span + self.margin + (x * self.col_width) - self.size // 2), this_row)
