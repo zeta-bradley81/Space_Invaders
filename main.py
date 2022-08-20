@@ -28,6 +28,7 @@ CALIBRATION_VALUE = 20
 FIRE_PROB = 3
 score = 0
 damage = 3
+level = 1
 
 # Screen Measurements
 # Area of Outer Space
@@ -80,14 +81,15 @@ def hit_an_alien():
         try:
             if f.mis.xcor() - CALIBRATION_VALUE < i1.alien_invaders[n].xcor() < f.mis.xcor() + CALIBRATION_VALUE:
                 if f.mis.ycor() - CALIBRATION_VALUE < i1.alien_invaders[n].ycor() < f.mis.ycor() + CALIBRATION_VALUE:
-                    playsound("audio/03_hit_shelter.wav", False)
+                    playsound("audio/03_hit_alien.wav", False)
                     i1.alien_invaders[n].hideturtle()
                     i1.alien_invaders.remove(i1.alien_invaders[n])
                     f.mis.goto(6000, 6000)
                     score += 10
                     sb.scoring(score)
                     beat_rate *= .99
-                    if len(i1.alien_invaders) == 70:
+                    if len(i1.alien_invaders) == 0:
+                        sleep(.3)
                         celebration()
         except IndexError:
             pass
@@ -99,7 +101,7 @@ def hit_an_alien():
                             shelter_list[sh].shelter_turtles[st].xcor() + CALIBRATION_VALUE:
                         if shelter_list[sh].shelter_turtles[st].ycor() - CALIBRATION_VALUE < f.mis.ycor() < \
                                 shelter_list[sh].shelter_turtles[st].ycor() + CALIBRATION_VALUE:
-                            playsound("audio/02_hit_alien.wav", False)
+                            playsound("audio/02_hit_shelter.wav", False)
                             shelter_list[sh].shelter_turtles[st].hideturtle()
                             shelter_list[sh].shelter_turtles.remove(shelter_list[sh].shelter_turtles[st])
                             f.mis.goto(6000, 6000)
@@ -148,8 +150,6 @@ def hit_by_laser():
                             laser_list[n].laser_status = False
                 except IndexError:
                     pass
-
-    #                     TODO lose a life
 
 
 def game_over():
@@ -249,38 +249,36 @@ screen.onkey(f.move_left, "a")
 screen.onkey(f.move_right, "Right")
 screen.onkey(f.move_right, "d")
 
-celebration()
-# game = True
-# state = game
-# beat = 0
-#
-# while game:
-#     screen.update()
-#     if f.weapons_status == False:
-#         f.missile_flight()
-#         hit_an_alien()
-#     hit_by_laser()
-#     # alien_attacks()
-#     for i in range(len(laser_list)):
-#         laser_list[i].laser_shoot()
-#     if beat % 8 == 0:
-#         state = i1.alien_motion()
-#     if beat % 32 == 0:
-#         playsound("audio/01_alien_beat.wav", False)
-#     sleep(beat_rate)
-#     beat += 1
-#     if state == 'shift':
-#         for i in range(len(laser_list)):
-#             laser_list[i].fire_speed += 1
-#             f.fire_speed += 1
-#             state = True
-#
-#
-#     # Game Over
-#     if state == False:
-#         playsound("audio/06_loss_of_life.wav", False)
-#         sleep(.3)
-#         game = False
-#         game_over()
+# ~~~~~~~~~~~~~~~~~   Gameplay ~~~~~~~~~~~~~~~~~
+game = True
+state = game
+beat = 0
+
+while game:
+    screen.update()
+    if f.weapons_status == False:
+        f.missile_flight()
+        hit_an_alien()
+    hit_by_laser()
+    # alien_attacks()
+    for i in range(len(laser_list)):
+        laser_list[i].laser_shoot()
+    if beat % 8 == 0:
+        state = i1.alien_motion()
+    if beat % 32 == 0:
+        playsound("audio/01_alien_beat.wav", False)
+    sleep(beat_rate)
+    beat += 1
+    if state == 'shift':
+        for i in range(len(laser_list)):
+            laser_list[i].fire_speed += 1
+            f.fire_speed += 1
+            state = True
+    # Game Over
+    if state == False:
+        playsound("audio/06_loss_of_life.wav", False)
+        sleep(.3)
+        game = False
+        game_over()
 
 screen.exitonclick()

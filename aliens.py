@@ -1,6 +1,5 @@
 from turtle import Turtle, register_shape
 from random import randint
-# TODO See commented out code below for ideas for an intro graphic
 
 class laser(Turtle):
     def __init__(self, x, y, ys):
@@ -27,6 +26,7 @@ class basicInvader(Turtle):
         super().__init__()
         for x in range(1, 10):
             register_shape(f'alien_gifs/alien_{x}.gif')
+        register_shape("alien_gifs/alien_1_large.gif")
         self.x_span = xs
         self.y_span = ys
         self.margin = mar
@@ -53,7 +53,9 @@ class basicInvader(Turtle):
                     na.goto((-self.x_span + self.margin + (x * self.col_width) - self.size // 2), this_row)
                     self.alien_invaders.append(na)
 
+
     def alien_motion(self):
+        # self.alien_invaders[0].goto(self.alien_invaders[0].xcor(), self.alien_invaders[0].ycor() - 50)
         # move down a row
         for n in range(len(self.alien_invaders)):
             if self.direction == "left":
@@ -81,11 +83,6 @@ class basicInvader(Turtle):
                         return False
                     return "shift"
 
-    # def laser_shoot(self):
-    #     if randint(0,2) == 0:
-    #         print(self.l1.xcor())
-    #         self.l1.forward(10)
-
 class bigAlien(Turtle):
     def __init__(self):
         super().__init__()
@@ -96,37 +93,9 @@ class bigAlien(Turtle):
         big.shape('alien_gifs/alien_1_large.gif')
         big.goto(0,0)
 
-
-
-
-
-
-
-# from turtle import Turtle, Screen
-#
-# screen = Screen()
-# screen.setup(800, 1000)
-# screen.bgcolor('black')
-# screen.tracer(0)
-#
-#
-# for x in range(0, 100):
-#     nl = Turtle()
-#     # nl.hideturtle()
-#     nl.color('white')
-#     nl.goto(10*x - 500, 500)
-#
-# for x in range(0, 100):
-#     nl = Turtle()
-#     # nl.hideturtle()
-#     nl.color('white')
-#     nl.goto(10*x - 500, -400)
-#
-# for x in range(0, 100):
-#     nl = Turtle()
-#     nl.hideturtle()
-#     nl.color('white')
-#     nl.goto(10*x - 500, -20)
-#
-# screen.update()
-# screen.exitonclick()
+    # def level_02(self):
+    #     na = Turtle()
+    #     na.penup()
+    #     na.shape("alien_gifs/alien_1_large.gif")
+    #     na.goto(0,1000)
+    #     self.alien_invaders.append(na)
