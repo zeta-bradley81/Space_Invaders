@@ -143,7 +143,7 @@ def hit_by_laser():
                             shelter_list[sh].shelter_turtles[st].xcor() + CALIBRATION_VALUE:
                         if shelter_list[sh].shelter_turtles[st].ycor() - CALIBRATION_VALUE < laser_list[n].las.ycor() < \
                                 shelter_list[sh].shelter_turtles[st].ycor() + CALIBRATION_VALUE:
-                            playsound("audio/02_hit_alien.wav", False)
+                            playsound("audio/02_hit_shelter.wav", False)
                             shelter_list[sh].shelter_turtles[st].hideturtle()
                             shelter_list[sh].shelter_turtles.remove(shelter_list[sh].shelter_turtles[st])
                             laser_list[n].las.goto(1000, 1000)
