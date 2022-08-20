@@ -1,9 +1,11 @@
 from tkinter import Tk
 from turtle import Screen
 from random import randint
+
+import aliens
 import fighter
 from shelter import Shelter
-from aliens import basicInvader, laser
+from aliens import basicInvader, laser, bigAlien
 from time import sleep
 from playsound import playsound
 from display import scoreBoard
@@ -85,8 +87,8 @@ def hit_an_alien():
                     score += 10
                     sb.scoring(score)
                     beat_rate *= .99
-                    # if len(i1.alien_invaders) == 00:
-                    #     game_over()
+                    if len(i1.alien_invaders) == 70:
+                        celebration()
         except IndexError:
             pass
         # Has missile hit a shelter?
@@ -175,6 +177,8 @@ def title_screen():
 
 def celebration():
     playsound("audio/08_celebration.wav", False)
+    screen.clear()
+    screen.bgcolor("black")
     title = scoreBoard(0, 0)
     title.scrbrd.clear()
     title.scrbrd.goto(0, 150)
@@ -199,7 +203,11 @@ def celebration():
     title.scrbrd.clear()
     title.scrbrd.goto(0,0)
     title.scrbrd.write("Congratulations!", align='center', font=("OCR A Std", font_base, 'bold'))
-    sleep(10.5)
+    sleep(6)
+    title.scrbrd.clear()
+    this = bigAlien()
+    this.ba()
+    sleep(5)
     quit()
 
 # ~~~~~~~~~~~~~~~~~    Initialize Graphics    ~~~~~~~~~~~~~~~~~
@@ -241,10 +249,11 @@ screen.onkey(f.move_left, "a")
 screen.onkey(f.move_right, "Right")
 screen.onkey(f.move_right, "d")
 
-game = True
-state = game
-beat = 0
 celebration()
+# game = True
+# state = game
+# beat = 0
+#
 # while game:
 #     screen.update()
 #     if f.weapons_status == False:

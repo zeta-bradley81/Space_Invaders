@@ -27,7 +27,6 @@ class basicInvader(Turtle):
         super().__init__()
         for x in range(1, 10):
             register_shape(f'alien_gifs/alien_{x}.gif')
-        # self.shape = 'alien'
         self.x_span = xs
         self.y_span = ys
         self.margin = mar
@@ -39,7 +38,6 @@ class basicInvader(Turtle):
         self.alien_invaders = []
         self.direction = "left"
         self.num_of_lasers = 0
-
 
 
     def level_01(self):
@@ -87,6 +85,16 @@ class basicInvader(Turtle):
     #     if randint(0,2) == 0:
     #         print(self.l1.xcor())
     #         self.l1.forward(10)
+
+class bigAlien(Turtle):
+    def __init__(self):
+        super().__init__()
+        register_shape("alien_gifs/alien_1_large.gif")
+
+    def ba(self):
+        big = Turtle()
+        big.shape('alien_gifs/alien_1_large.gif')
+        big.goto(0,0)
 
 
 

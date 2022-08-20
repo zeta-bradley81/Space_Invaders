@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, register_shape
 
 class scoreBoard():
     def __init__(self, x, y):
@@ -17,4 +17,5 @@ class scoreBoard():
     def damage(self, new_damage):
         self.scrbrd.clear()
         self.scrbrd.write(new_damage, align='left', font=("OCR A Std", 28, "bold"))
+
 
