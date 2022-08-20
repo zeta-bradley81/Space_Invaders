@@ -1,5 +1,4 @@
 from turtle import Turtle, register_shape
-from random import randint
 
 class laser(Turtle):
     def __init__(self, x, y, ys):

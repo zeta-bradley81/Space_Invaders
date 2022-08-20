@@ -1,4 +1,4 @@
-from turtle import Turtle, register_shape
+from turtle import Turtle
 
 class scoreBoard():
     def __init__(self, x, y):

@@ -1,13 +1,11 @@
 from tkinter import Tk
 from turtle import Screen
 from random import randint
-
-import aliens
+from time import sleep
+from playsound import playsound
 import fighter
 from shelter import Shelter
 from aliens import basicInvader, laser, bigAlien
-from time import sleep
-from playsound import playsound
 from display import scoreBoard
 
 root = Tk()
@@ -17,18 +15,16 @@ game_height = int(monitor_height * .9)
 game_width = int(game_height * 1.6)
 font_base = game_width // 12
 
-
 # Tempo
 BASE_BEAT_RATE = 0.07
 beat_rate = BASE_BEAT_RATE
+
 # Adjusts for the size of the turtles
 CALIBRATION_VALUE = 20
-# Shape of Alien
-# SA = 'square'
+
 FIRE_PROB = 3
 score = 0
 damage = 3
-level = 1
 
 # Screen Measurements
 # Area of Outer Space
@@ -122,10 +118,8 @@ def hit_by_laser():
             laser_list[n].laser_status = False
 
         # Has laser hit the fighter?
-        if laser_list[n].las.xcor() - 1.5 * CALIBRATION_VALUE <= f.f1.xcor() <= laser_list[
-            n].las.xcor() + 1.5 * CALIBRATION_VALUE:
-            if laser_list[n].las.ycor() - CALIBRATION_VALUE <= f.f1.ycor() <= laser_list[
-                n].las.ycor() + CALIBRATION_VALUE:
+        if laser_list[n].las.xcor() - 1.5 * CALIBRATION_VALUE <= f.f1.xcor() <= laser_list[n].las.xcor() + 1.5 * CALIBRATION_VALUE:
+            if laser_list[n].las.ycor() - CALIBRATION_VALUE <= f.f1.ycor() <= laser_list[n].las.ycor() + CALIBRATION_VALUE:
                 laser_list[n].laser_status = False
                 laser_list[n].las.goto(laser_list[n].las.xcor(), 2000)
                 playsound("audio/06_loss_of_life.wav", False)
@@ -166,11 +160,11 @@ def title_screen():
     title.scrbrd.clear()
     title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", font_base, 'bold'))
     title.scrbrd.goto(0, -100)
-    title.scrbrd.write("left/right arrows: move", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("left/right arrows: move", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     title.scrbrd.goto(0, -130)
-    title.scrbrd.write("up arrow: fire", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("up arrow: fire", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     title.scrbrd.goto(0, -160)
-    title.scrbrd.write("3 strikes and you're out", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("3 strikes and you're out", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     playsound("audio/00_Intro.wav", True)
     title.scrbrd.clear()
 
@@ -185,23 +179,23 @@ def celebration():
     title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", font_base, 'bold'))
     title.scrbrd.goto(0, 100)
     sleep(3)
-    title.scrbrd.write("by Alan Tormey, 2022", align='center', font=("OCR A Std", font_base//2, 'bold'))
+    title.scrbrd.write("by Alan Tormey, 2022", align='center', font=("OCR A Std", font_base // 2, 'bold'))
     title.scrbrd.goto(0, 50)
     sleep(3)
-    title.scrbrd.write("Inspired by Space Invaders ", align='center', font=("OCR A Std", font_base//3, 'bold'))
+    title.scrbrd.write("Inspired by Space Invaders ", align='center', font=("OCR A Std", font_base // 3, 'bold'))
     title.scrbrd.goto(0, 0)
     sleep(3)
-    title.scrbrd.write("by Tomohiro Nishikado", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("by Tomohiro Nishikado", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     title.scrbrd.goto(0, -50)
     sleep(3)
-    title.scrbrd.write("and Taito", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("and Taito", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     title.scrbrd.goto(0, -100)
     sleep(3)
-    title.scrbrd.write("1978", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.write("1978", align='center', font=("OCR A Std", font_base // 4, 'bold'))
     title.scrbrd.goto(0, -150)
     sleep(3)
     title.scrbrd.clear()
-    title.scrbrd.goto(0,0)
+    title.scrbrd.goto(0, 0)
     title.scrbrd.write("Congratulations!", align='center', font=("OCR A Std", font_base, 'bold'))
     sleep(6)
     title.scrbrd.clear()
@@ -209,6 +203,7 @@ def celebration():
     this.ba()
     sleep(5)
     quit()
+
 
 # ~~~~~~~~~~~~~~~~~    Initialize Graphics    ~~~~~~~~~~~~~~~~~
 screen = Screen()

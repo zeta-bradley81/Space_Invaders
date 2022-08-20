@@ -1,6 +1,5 @@
 from turtle import Turtle, register_shape
 from playsound import playsound
-# from weapons import Missile
 
 
 class Fighter(Turtle):
