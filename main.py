@@ -13,6 +13,8 @@ root.withdraw()
 monitor_height = root.winfo_screenheight()
 game_height = int(monitor_height * .9)
 game_width = int(game_height * 1.6)
+font_base = game_width // 12
+
 
 # Tempo
 BASE_BEAT_RATE = 0.07
@@ -152,7 +154,7 @@ def game_over():
     screen.clear()
     go = scoreBoard(0, 0)
     go.scrbrd.clear()
-    go.scrbrd.write("Game Over", align='center', font=("OCR A Std", 100, "bold"))
+    go.scrbrd.write("Game Over", align='center', font=("OCR A Std", font_base, "bold"))
     playsound("audio/07_alien_laugh.wav", True)
     quit()
 
@@ -160,16 +162,45 @@ def game_over():
 def title_screen():
     title = scoreBoard(0, 0)
     title.scrbrd.clear()
-    title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", 100, 'bold'))
+    title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", font_base, 'bold'))
     title.scrbrd.goto(0, -100)
-    title.scrbrd.write("left/right arrows: move", align='center', font=("OCR A Std", 18, 'bold'))
+    title.scrbrd.write("left/right arrows: move", align='center', font=("OCR A Std", font_base//4, 'bold'))
     title.scrbrd.goto(0, -130)
-    title.scrbrd.write("up arrow: fire", align='center', font=("OCR A Std", 18, 'bold'))
+    title.scrbrd.write("up arrow: fire", align='center', font=("OCR A Std", font_base//4, 'bold'))
     title.scrbrd.goto(0, -160)
-    title.scrbrd.write("3 strikes and you're out", align='center', font=("OCR A Std", 18, 'bold'))
+    title.scrbrd.write("3 strikes and you're out", align='center', font=("OCR A Std", font_base//4, 'bold'))
     playsound("audio/00_Intro.wav", True)
     title.scrbrd.clear()
 
+
+def celebration():
+    playsound("audio/08_celebration.wav", False)
+    title = scoreBoard(0, 0)
+    title.scrbrd.clear()
+    title.scrbrd.goto(0, 150)
+    title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", font_base, 'bold'))
+    title.scrbrd.goto(0, 100)
+    sleep(3)
+    title.scrbrd.write("by Alan Tormey, 2022", align='center', font=("OCR A Std", font_base//2, 'bold'))
+    title.scrbrd.goto(0, 50)
+    sleep(3)
+    title.scrbrd.write("Inspired by Space Invaders ", align='center', font=("OCR A Std", font_base//3, 'bold'))
+    title.scrbrd.goto(0, 0)
+    sleep(3)
+    title.scrbrd.write("by Tomohiro Nishikado", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.goto(0, -50)
+    sleep(3)
+    title.scrbrd.write("and Taito", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.goto(0, -100)
+    sleep(3)
+    title.scrbrd.write("1978", align='center', font=("OCR A Std", font_base//4, 'bold'))
+    title.scrbrd.goto(0, -150)
+    sleep(3)
+    title.scrbrd.clear()
+    title.scrbrd.goto(0,0)
+    title.scrbrd.write("Congratulations!", align='center', font=("OCR A Std", font_base, 'bold'))
+    sleep(10.5)
+    quit()
 
 # ~~~~~~~~~~~~~~~~~    Initialize Graphics    ~~~~~~~~~~~~~~~~~
 screen = Screen()
@@ -213,33 +244,34 @@ screen.onkey(f.move_right, "d")
 game = True
 state = game
 beat = 0
-while game:
-    screen.update()
-    if f.weapons_status == False:
-        f.missile_flight()
-        hit_an_alien()
-    hit_by_laser()
-    # alien_attacks()
-    for i in range(len(laser_list)):
-        laser_list[i].laser_shoot()
-    if beat % 8 == 0:
-        state = i1.alien_motion()
-    if beat % 32 == 0:
-        playsound("audio/01_alien_beat.wav", False)
-    sleep(beat_rate)
-    beat += 1
-    if state == 'shift':
-        for i in range(len(laser_list)):
-            laser_list[i].fire_speed += 1
-            f.fire_speed += 1
-            state = True
-
-
-    # Game Over
-    if state == False:
-        playsound("audio/06_loss_of_life.wav", False)
-        sleep(.3)
-        game = False
-        game_over()
+celebration()
+# while game:
+#     screen.update()
+#     if f.weapons_status == False:
+#         f.missile_flight()
+#         hit_an_alien()
+#     hit_by_laser()
+#     # alien_attacks()
+#     for i in range(len(laser_list)):
+#         laser_list[i].laser_shoot()
+#     if beat % 8 == 0:
+#         state = i1.alien_motion()
+#     if beat % 32 == 0:
+#         playsound("audio/01_alien_beat.wav", False)
+#     sleep(beat_rate)
+#     beat += 1
+#     if state == 'shift':
+#         for i in range(len(laser_list)):
+#             laser_list[i].fire_speed += 1
+#             f.fire_speed += 1
+#             state = True
+#
+#
+#     # Game Over
+#     if state == False:
+#         playsound("audio/06_loss_of_life.wav", False)
+#         sleep(.3)
+#         game = False
+#         game_over()
 
 screen.exitonclick()
