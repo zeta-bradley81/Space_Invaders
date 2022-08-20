@@ -161,7 +161,13 @@ def title_screen():
     title = scoreBoard(0, 0)
     title.scrbrd.clear()
     title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", 100, 'bold'))
-    # playsound("audio/HOSPE_FX_Loop_138_Sweep_Bowl.wav", True)
+    title.scrbrd.goto(0, -100)
+    title.scrbrd.write("left/right arrows: move", align='center', font=("OCR A Std", 18, 'bold'))
+    title.scrbrd.goto(0, -130)
+    title.scrbrd.write("up arrow: fire", align='center', font=("OCR A Std", 18, 'bold'))
+    title.scrbrd.goto(0, -160)
+    title.scrbrd.write("3 strikes and you're out", align='center', font=("OCR A Std", 18, 'bold'))
+    playsound("audio/00_Intro.wav", True)
     title.scrbrd.clear()
 
 
