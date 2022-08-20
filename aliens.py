@@ -35,7 +35,6 @@ class basicInvader(Turtle):
         self.size = size
         self.row_height = rh
         self.alien_invaders = []
-        # TODO I think i need to move this down to the function
         self.top_row = r0 + 1.5 * rh
         self.alien_invaders = []
         self.direction = "left"
@@ -52,8 +51,7 @@ class basicInvader(Turtle):
                     na = Turtle()
                     na.penup()
                     na.shape(f'alien_gifs/alien_{y+2}.gif')
-                    na.shapesize(1.5, 1.5)
-                    na.color("white")
+                    # na.shapesize(1.5, 1.5)
                     na.goto((-self.x_span + self.margin + (x * self.col_width) - self.size // 2), this_row)
                     self.alien_invaders.append(na)
 
@@ -84,7 +82,6 @@ class basicInvader(Turtle):
                         # TODO gameover
                         return False
                     return "shift"
-
 
     # def laser_shoot(self):
     #     if randint(0,2) == 0:

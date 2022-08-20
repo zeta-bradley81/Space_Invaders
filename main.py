@@ -15,7 +15,8 @@ game_height = int(monitor_height * .9)
 game_width = int(game_height * 1.6)
 
 # Tempo
-BEAT_RATE = 0.07
+BASE_BEAT_RATE = 0.07
+beat_rate = BASE_BEAT_RATE
 # Adjusts for the size of the turtles
 CALIBRATION_VALUE = 20
 # Shape of Alien
@@ -69,7 +70,7 @@ def generate_shelters():
 
 
 def hit_an_alien():
-    global score
+    global score, beat_rate
     # Has missile hit an alien
     for n in range(len(i1.alien_invaders)):
         try:
@@ -81,6 +82,7 @@ def hit_an_alien():
                     f.mis.goto(6000, 6000)
                     score += 10
                     sb.scoring(score)
+                    beat_rate *= .99
                     # if len(i1.alien_invaders) == 00:
                     #     game_over()
         except IndexError:
@@ -159,7 +161,7 @@ def title_screen():
     title = scoreBoard(0, 0)
     title.scrbrd.clear()
     title.scrbrd.write("Alien Incursion", align='center', font=("OCR A Std", 100, 'bold'))
-    playsound("audio/HOSPE_FX_Loop_138_Sweep_Bowl.wav", True)
+    # playsound("audio/HOSPE_FX_Loop_138_Sweep_Bowl.wav", True)
     title.scrbrd.clear()
 
 
@@ -218,13 +220,14 @@ while game:
         state = i1.alien_motion()
     if beat % 32 == 0:
         playsound("audio/01_alien_beat.wav", False)
-    sleep(BEAT_RATE)
+    sleep(beat_rate)
     beat += 1
     if state == 'shift':
         for i in range(len(laser_list)):
             laser_list[i].fire_speed += 1
             f.fire_speed += 1
             state = True
+
 
     # Game Over
     if state == False:
