@@ -61,6 +61,7 @@ def generate_shelters():
     shelter_list.append(s4)
 
 def hit_an_alien():
+    # Has missile hit an alien
     for n in range(len(i1.alien_invaders)):
         try:
             if f.mis.xcor() - CALIBRATION_VALUE < i1.alien_invaders[n].xcor() < f.mis.xcor() + CALIBRATION_VALUE:
@@ -71,6 +72,21 @@ def hit_an_alien():
                     f.mis.goto(6000, 6000)
         except IndexError:
             pass
+        # Has missile hit a shelter?
+        for sh in range(len(shelter_list)):
+            for st in range(len(shelter_list[sh].shelter_turtles)):
+                try:
+                    if shelter_list[sh].shelter_turtles[st].xcor() - CALIBRATION_VALUE < f.mis.xcor() < \
+                            shelter_list[sh].shelter_turtles[st].xcor() + CALIBRATION_VALUE:
+                        if shelter_list[sh].shelter_turtles[st].ycor() - CALIBRATION_VALUE < f.mis.ycor() < shelter_list[sh].shelter_turtles[st].ycor() + CALIBRATION_VALUE:
+                            playsound("audio/02_hit_alien.wav", False)
+                            shelter_list[sh].shelter_turtles[st].hideturtle()
+                            shelter_list[sh].shelter_turtles.remove(shelter_list[sh].shelter_turtles[st])
+                            f.mis.goto(6000, 6000)
+
+                except IndexError:
+                    pass
+
 
 def hit_by_laser():
     global active_lasers
@@ -145,14 +161,12 @@ screen.onkey(f.move_right, "d")
 game = True
 state = game
 beat = 0
-shelter_list[0].shelter_turtles[2].hideturtle()
-shelter_list[0].shelter_turtles.remove(shelter_list[0].shelter_turtles[2])
 
 while game:
     screen.update()
     if f.weapons_status == False:
         f.missile_flight()
-    hit_an_alien()
+        hit_an_alien()
     hit_by_laser()
     # alien_attacks()
     for i in range(len(laser_list)):

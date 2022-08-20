@@ -24,7 +24,8 @@ class laser(Turtle):
 class basicInvader(Turtle):
     def __init__(self, shape, xs, ys, mar, cw, size, rh, r0):
         super().__init__()
-        register_shape('alien_01.gif')
+        for x in range(1, 10):
+            register_shape(f'alien_gifs/alien_{x}.gif')
         # self.shape = 'alien'
         self.x_span = xs
         self.y_span = ys
@@ -49,8 +50,7 @@ class basicInvader(Turtle):
                 if 3 < x < 13:
                     na = Turtle()
                     na.penup()
-                    # na.shape(self.shape)
-                    na.shape('alien_01.gif')
+                    na.shape(f'alien_gifs/alien_{y+2}.gif')
                     na.shapesize(1.5, 1.5)
                     na.color("white")
                     na.goto((-self.x_span + self.margin + (x * self.col_width) - self.size // 2), this_row)
