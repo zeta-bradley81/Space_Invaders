@@ -8,14 +8,15 @@ class scoreBoard():
         self.scrbrd.penup()
         self.scrbrd.color("green")
         self.scrbrd.goto(-x, y)
-        self.scrbrd.write("00", align='left', font=("OCR A Std", 28, "bold"))
+        self.scrbrd.write("00", align='left', font=("OCR A STD", 28, "bold"))
+
 
     def scoring(self, new_score):
         self.scrbrd.clear()
-        self.scrbrd.write(new_score, align='left', font=("OCR A Std", 28, "bold"))
+        self.scrbrd.write(new_score, align='left', font=("OCR A STD", 28, "bold"))
 
     def damage(self, new_damage):
         self.scrbrd.clear()
-        self.scrbrd.write(new_damage, align='left', font=("OCR A Std", 28, "bold"))
+        self.scrbrd.write(new_damage, align='left', font=("OCR A STD", 28, "bold"))
 
 

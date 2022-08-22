@@ -25,7 +25,16 @@ class basicInvader(Turtle):
         super().__init__()
         for x in range(1, 10):
             register_shape(f'alien_gifs/alien_{x}.gif')
-        register_shape("alien_gifs/alien_1_large.gif")
+        # register_shape('alien_gifs/alien_1.gif')
+        # register_shape('alien_gifs/alien_2.gif')
+        # register_shape('alien_gifs/alien_3.gif')
+        # register_shape('alien_gifs/alien_4.gif')
+        # register_shape('alien_gifs/alien_5.gif')
+        # register_shape('alien_gifs/alien_6.gif')
+        # register_shape('alien_gifs/alien_7.gif')
+        # register_shape('alien_gifs/alien_8.gif')
+        # register_shape('alien_gifs/alien_9.gif')
+        # register_shape("alien_gifs/alien_1_large.gif")
         self.x_span = xs
         self.y_span = ys
         self.margin = mar
@@ -48,6 +57,7 @@ class basicInvader(Turtle):
                     na = Turtle()
                     na.penup()
                     na.shape(f'alien_gifs/alien_{y+2}.gif')
+                    # na.shape("alien_gifs/alien_{num}.gif".format(num=y))
                     # na.shapesize(1.5, 1.5)
                     na.goto((-self.x_span + self.margin + (x * self.col_width) - self.size // 2), this_row)
                     self.alien_invaders.append(na)
